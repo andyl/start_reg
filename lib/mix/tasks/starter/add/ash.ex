@@ -2,6 +2,10 @@ defmodule Mix.Tasks.Starter.Add.Ash do
   @shortdoc "Adds Ash"
   @moduledoc "Adds `ash` as a dependency."
 
+  # https://ash-hq.org/
+  # https://ash.hexdocs.pm/readme.html
+  # https://github.com/ash-project/ash
+
   use Igniter.Mix.Task
 
   @impl Igniter.Mix.Task

@@ -4,6 +4,9 @@ defmodule Mix.Tasks.Starter.Add.AshPhoenix do
 
   use Igniter.Mix.Task
 
+  # https://ash-phoenix.hexdocs.pm/readme.html
+  # https://github.com/ash-project/ash_phoenix
+
   @impl Igniter.Mix.Task
   def igniter(igniter) do
     {package, version} = Starter.Versions.latest_hex_dep(:ash_phoenix)
