@@ -1,23 +1,21 @@
 # StartReg
 
-A Step Registry for Elixir Starter 
+A Registry for Elixir Starter 
 
 - Parent Project: [starter](https://github.com/jamilabreu/starter)
-- Related Project: [startpro](https://github.com/andyl/startpro) 
+- Related Project: [start_pro](https://github.com/andyl/start_pro) 
 
 ## Overview 
 
 This project contains two types of assets:
 
-- Steps - self-contained installation tasks 
+- Steps - self-contained app-=config tasks 
 - Starters - a list of steps 
 
 These are built mostly for my own personal use and experimentation, not as a
-public registry.  The steps under `mix/tasks/starter` should be useable by
-anyone on any project.  The steps under `mix/tasks/starterp` are `personal`,
-and might contain things like path dependencies and calls to local executables
-that would not work on your local machine. But anyone is welcome to read reuse
-anything as desired. 
+public registry.  Step names that begin with "xp_" are experimental, with path
+and executable dependencies such that they probably will not work on 3rd party
+hosts. Anyone is welcome to read reuse anything as desired. 
 
 ## Installation 
 
@@ -33,4 +31,8 @@ def deps do
   ]
 end
 ```
+
+## Using StartReg Steps 
+
+CLAUDE: describe how to use steps, as mix tasks, and as module entries in a starter profile.
 

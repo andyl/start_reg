@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Starterp.Gen.MixCompletions do
+defmodule Mix.Tasks.StartReg.Gen.XpMixCompletions do
   @shortdoc "Generates mix completions"
   @moduledoc """
   Generates mix completions
