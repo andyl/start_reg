@@ -1,4 +1,4 @@
-# Stepreg
+# StepReg
 
 A Step Registry for Elixir Starter 
 
@@ -13,11 +13,12 @@ This project contains two types of assets:
 - Starters - a list of steps 
 
 These are build for my own personal use and experimentation, not as a public
-registry.  But anyone is welcome to reuse as desired. 
+registry.  Many of the steps reference packages as path dependencies.  But
+anyone is welcome to reuse as desired. 
 
 ## Installation 
 
-This `stepreg` project is not published on Hex.  Add it next to `starter`
+This `step_reg` project is not published on Hex.  Add it next to `starter`
 or optionally `startpro` as a dev-only dependency, from a local path or from github:
 
 ```
@@ -25,7 +26,7 @@ def deps do
   [
     {:starter, "~> 0.5", only: :dev},
     {:startpro, git: "https://github.com/andyl/startpro", only: :dev}, 
-    {:startpro, git: "https://github.com/andyl/stepreg", only: :dev}
+    {:step_reg, git: "https://github.com/andyl/step_reg", only: :dev}
   ]
 end
 ```
