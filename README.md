@@ -12,9 +12,12 @@ This project contains two types of assets:
 - Steps - self-contained installation tasks 
 - Starters - a list of steps 
 
-These are build for my own personal use and experimentation, not as a public
-registry.  Many of the steps reference packages as path dependencies.  But
-anyone is welcome to reuse as desired. 
+These are built mostly for my own personal use and experimentation, not as a
+public registry.  The steps under `mix/tasks/starter` should be useable by
+anyone on any project.  The steps under `mix/tasks/starterp` are `personal`,
+and might contain things like path dependencies and calls to local executables
+that would not work on your local machine. But anyone is welcome to read reuse
+anything as desired. 
 
 ## Installation 
 
