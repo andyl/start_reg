@@ -1,11 +1,15 @@
 defmodule Mix.Tasks.Starter.Add.AshPhoenix do
   @shortdoc "Adds AshPhoenix"
-  @moduledoc "Adds `ash_phoenix` as a dependency."
+  @moduledoc """
+  Adds `ash_phoenix` as a dependency.
+
+  Referencees:
+
+  - https://ash-phoenix.hexdocs.pm/readme.html
+  - https://github.com/ash-project/ash_phoenix
+  """
 
   use Igniter.Mix.Task
-
-  # https://ash-phoenix.hexdocs.pm/readme.html
-  # https://github.com/ash-project/ash_phoenix
 
   @impl Igniter.Mix.Task
   def igniter(igniter) do
