@@ -1,6 +1,6 @@
-defmodule Stepreg do
+defmodule StartReg do
   @moduledoc """
-  Documentation for `Stepreg`.
+  Documentation for `StartReg`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Stepreg do
 
   ## Examples
 
-      iex> Stepreg.hello()
+      iex> StartReg.hello()
       :world
 
   """

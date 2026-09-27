@@ -1,4 +1,4 @@
-defmodule StepReg.Starter.Base do
+defmodule StartReg.Starter.Base do
   def steps do
     [
     ]

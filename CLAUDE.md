@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-StepReg is a personal registry of installation **steps** and **starters** for
+StartReg is a personal registry of installation **steps** and **starters** for
 [starter](https://github.com/jamilabreu/starter) (and the related
 [startpro](https://github.com/andyl/startpro)). It is not published on Hex; it
 is consumed as a `only: :dev` git/path dependency by apps that use `starter`.
 
 - **Steps**: self-contained Igniter mix tasks that each install/generate/remove one thing.
-- **Starters**: ordered lists of steps (e.g. `StepReg.Starter.Base.steps/0`).
+- **Starters**: ordered lists of steps (e.g. `StartReg.Starter.Base.steps/0`).
 
 ## Commands
 
@@ -18,7 +18,7 @@ is consumed as a `only: :dev` git/path dependency by apps that use `starter`.
 mix deps.get
 mix compile
 mix test                               # all tests
-mix test test/stepreg_test.exs:5       # single test by file:line
+mix test test/start_reg_test.exs:5     # single test by file:line
 mix format
 ```
 
@@ -49,5 +49,5 @@ Naming matters: `starter` maps a step tuple like `{:add, :ash_phoenix}` to the m
 (`mix starter.add.ash`) or referenced by module in a starter's `steps/0` list. Avoid
 naming a step the same as one already built into `deps/starter/lib/mix/tasks/starter/`.
 
-The `Stepreg` module in `lib/step_reg.ex` and its test are leftover `mix new` scaffolding;
-the project module is `Stepreg.MixProject`, while code modules use the `StepReg` casing.
+The `StartReg` module in `lib/start_reg.ex` and its test are leftover `mix new` scaffolding;
+all modules (including `StartReg.MixProject`) use the `StartReg` casing.

@@ -1,4 +1,4 @@
-# StepReg
+# StartReg
 
 A Step Registry for Elixir Starter 
 
@@ -21,7 +21,7 @@ anything as desired.
 
 ## Installation 
 
-This `step_reg` project is not published on Hex.  Add it next to `starter`
+This `start_reg` project is not published on Hex.  Add it next to `starter`
 or optionally `startpro` as a dev-only dependency, from a local path or from github:
 
 ```
@@ -29,7 +29,7 @@ def deps do
   [
     {:starter, "~> 0.5", only: :dev},
     {:startpro, git: "https://github.com/andyl/startpro", only: :dev}, 
-    {:step_reg, git: "https://github.com/andyl/step_reg", only: :dev}
+    {:start_reg, git: "https://github.com/andyl/start_reg", only: :dev}
   ]
 end
 ```

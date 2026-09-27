@@ -1,9 +1,9 @@
-defmodule Stepreg.MixProject do
+defmodule StartReg.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :step_reg,
+      app: :start_reg,
       version: "0.1.0",
       elixir: "~> 1.20",
       start_permanent: Mix.env() == :prod,
