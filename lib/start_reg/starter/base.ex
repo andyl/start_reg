@@ -3,7 +3,6 @@ defmodule StartReg.Starter.Base do
 
   @impl Starter
   def steps do
-    [
-    ]
+    []
   end
 end
