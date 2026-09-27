@@ -23,15 +23,16 @@ mix format
 ```
 
 Requires Elixir `~> 1.20`. Steps can be exercised against a scratch app (one that
-depends on this project) with `mix starter.add.ash`, `mix starterp.gen.mix_completions`, etc.
+depends on this project) with `mix start_reg.add.ash`, `mix start_reg.gen.xp_mix_completions`, etc.
 
 ## Layout and conventions
 
-Steps live under `lib/mix/tasks/` in two namespaces, each split into `add/`, `gen/`, `remove/`:
+Steps live under `lib/mix/tasks/start_reg/`, split into `add/`, `gen/`, `remove/`, as modules
+`Mix.Tasks.StartReg.{Add,Gen,Remove}.*` (run as `mix start_reg.add.<name>`, etc.).
 
-- `starter/` → `Mix.Tasks.Starter.{Add,Gen,Remove}.*` — general-purpose steps usable by anyone.
-- `starterp/` → `Mix.Tasks.Starterp.{Add,Gen,Remove}.*` — **personal** steps that may use
-  path deps or local executables and are not expected to work on other machines.
+Steps whose name begins with `xp_` (e.g. `Mix.Tasks.StartReg.Gen.XpMixCompletions`) are
+**experimental/personal**: they may use path deps or local executables and are not expected
+to work on other machines.
 
 Each step is a module that `use Igniter.Mix.Task` and implements `igniter/1`, returning the
 (modified) igniter. Include `@shortdoc`, `@moduledoc`, and reference URLs as comments. For
@@ -42,12 +43,16 @@ Each step is a module that `use Igniter.Mix.Task` and implements `igniter/1`, re
 Igniter.Project.Deps.add_dep(igniter, {package, version})
 ```
 
-Naming matters: `starter` maps a step tuple like `{:add, :ash_phoenix}` to the module
-`Mix.Tasks.Starter.Add.AshPhoenix` (underscored last segment). Note that
-`Starter.Steps` discovery (`mix starter.add <name>`, `--list`) only scans modules in the
-`:starter` application itself, so steps defined here are invoked as their own mix task
-(`mix starter.add.ash`) or referenced by module in a starter's `steps/0` list. Avoid
-naming a step the same as one already built into `deps/starter/lib/mix/tasks/starter/`.
+StartReg steps are never reached through step tuples: `starter` maps `{:add, :ash}` to its
+own built-in step or the package's upstream installer. `Starter.Steps` discovery
+(`mix starter.add <name>`, `--list`) only scans the `:starter` application, so steps defined
+here are invoked as their own mix task (`mix start_reg.add.ash`) or referenced by module in a
+starter's `steps/0` list (`Mix.Tasks.StartReg.Add.Ash` or `{Mix.Tasks.StartReg.Add.Ash, if: :flag}`).
+
+Starters live in `lib/start_reg/starter/` as `StartReg.Starter.*` modules. Each must
+`use Starter` and implement `@impl Starter def steps/0`; `use Starter` defines
+`__starter__?/0`, which `mix starter.new --from StartReg.Starter.Base` requires. Apps can
+also include one with `{:starter, StartReg.Starter.Base}`.
 
 The `StartReg` module in `lib/start_reg.ex` and its test are leftover `mix new` scaffolding;
 all modules (including `StartReg.MixProject`) use the `StartReg` casing.
