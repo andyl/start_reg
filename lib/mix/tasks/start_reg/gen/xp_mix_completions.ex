@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.StartReg.Gen.XpMixCompletions do
-  @shortdoc "Generates mix completions"
+  @shortdoc "Generate mix completions"
   @moduledoc """
-  Generates mix completions
+  Generate mix completions
 
   References:
 

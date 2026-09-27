@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.StartReg.Add.AshPostgres do
-  @shortdoc "Adds AshPostgres"
+  @shortdoc "Add AshPostgres"
   @moduledoc """
-  Adds `ash_postgres` as a dependency.
+  Add `ash_postgres` as a dependency.
 
   Referencees:
 

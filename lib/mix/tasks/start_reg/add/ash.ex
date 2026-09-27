@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.StartReg.Add.Ash do
-  @shortdoc "Adds Ash"
+  @shortdoc "Add Ash"
   @moduledoc """
-  Adds `ash` as a dependency.
+  Add `ash` as a dependency.
 
   References:
 
