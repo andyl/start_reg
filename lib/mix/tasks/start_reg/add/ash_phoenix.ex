@@ -4,10 +4,11 @@ defmodule Mix.Tasks.StartReg.Add.AshPhoenix do
   Add `ash_phoenix` as a dependency and run its Igniter installer
   (`mix ash_phoenix.install`).
 
-  References:
+  Reference:
 
   - https://ash-phoenix.hexdocs.pm/readme.html
   - https://github.com/ash-project/ash_phoenix
+
   """
 
   use Igniter.Mix.Task
