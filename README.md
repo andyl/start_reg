@@ -26,7 +26,7 @@ or optionally `startpro` as a dev-only dependency, from a local path or from git
 def deps do
   [
     {:starter, "~> 0.5", only: :dev},
-    {:startpro, git: "https://github.com/andyl/startpro", only: :dev}, 
+    {:start_pro, git: "https://github.com/andyl/start_pro", only: :dev},
     {:start_reg, git: "https://github.com/andyl/start_reg", only: :dev}
   ]
 end
@@ -35,8 +35,9 @@ end
 ## Using StartReg Steps 
 
 Each StartReg step is an Igniter mix task under the `start_reg` namespace
-(`lib/mix/tasks/start_reg/{add,gen,remove}/`). You can use a step in two
-ways: run it as a mix task, or list its module in a starter.
+(`lib/mix/tasks/start_reg/{add,gen,remove}/`). You can use a step in three
+ways: run it as a mix task, list its module in a starter, or name it with a
+`from: StartReg` tuple in a `start_pro` profile.
 
 ### As mix tasks
 
@@ -62,8 +63,9 @@ find StartReg steps.
 ### As module entries in a starter
 
 In a starter's `steps/0` list, refer to a StartReg step by its module name.
-Do not use a tuple: `{:add, :ash}` goes to `starter`'s own step or to the
-package's upstream installer, never to StartReg.
+Plain `starter` has no tuple form for StartReg steps: `{:add, :ash}` goes to
+`starter`'s own step or to the package's upstream installer, never to
+StartReg. The shorter `from:` tuple below works only in `start_pro` profiles.
 
 ```elixir
 defmodule Mix.Tasks.MyApp.Starter do
@@ -85,6 +87,47 @@ Module entries run in list order along with the other steps, and all their
 changes appear in the same diff. A module entry can take options as a
 `{Module, opts}` tuple. `if: :flag` makes the step run only when you pass
 `--flag` to `mix starter.run`.
+
+### As tuples in a start_pro profile
+
+[start_pro](https://github.com/andyl/start_pro) profiles accept a shorter
+tuple form. Name the step by kind and name, and add `from: StartReg`:
+
+```elixir
+# ~/.config/start_pro/profiles.exs
+[
+  ash_app: [
+    {:remove, :daisy_ui},                                          # built-in starter step
+    {:add, :ash, from: StartReg},                                  # Mix.Tasks.StartReg.Add.Ash
+    {:add, :ash_phoenix, from: StartReg},                          # Mix.Tasks.StartReg.Add.AshPhoenix
+    {:gen, :xp_mix_completions, from: StartReg, if: :completions}  # only with --completions
+  ]
+]
+```
+
+```bash
+mix start_pro.run ash_app --completions
+```
+
+The tuple `{kind, :name, from: StartReg}` names the module
+`Mix.Tasks.StartReg.<Kind>.<Name>`:
+
+- The kind is `:add`, `:gen` or `:remove`, one for each step directory.
+- The name is camelized, so `:ash_phoenix` becomes `AshPhoenix`.
+- `from:` is required. Without it, `{:add, :ash}` is an ordinary `starter`
+  step and does not reach StartReg.
+- Write `from: StartReg` as a module, not as an atom like `:start_reg`.
+- `if: :flag` works as it does on any other step.
+
+`start_pro` translates the tuple to the module just before it runs the
+steps. `mix start_pro.list.steps` and the run's commit message show the step
+as you wrote it. If `start_reg` isn't a dependency of the app, or no step has
+that name, `mix start_pro.run` stops before it changes anything and names the
+step.
+
+Use this form only in `start_pro` profiles. `starter` does not understand
+`from:`, so starter modules, including the ones in `lib/start_reg/starter/`,
+must keep the full module names.
 
 ### Using a StartReg starter
 
