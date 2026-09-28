@@ -19,8 +19,8 @@ defmodule StartReg.MixProject do
 
   defp deps do
     [
-      {:starter, "~> 0.5"},
-      {:igniter, "~> 0.8"}
+      {:starter, "~> 0.5", only: [:dev, :test]},
+      {:igniter, "~> 0.6", only: [:dev, :test]}
     ]
   end
 end
