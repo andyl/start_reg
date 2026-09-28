@@ -10,7 +10,7 @@ defmodule Mix.Tasks.StartReg.Gen.XpGenAuth do
       mix ash.gen.resource $APP.Accounts.User --uuid-v7-primary-key id \\
         -a username:ci_string -a slug:ci_string -t --conflicts replace --yes
       mix ash.codegen add_user_uuidv7_username_slug
-      mix ash.setup
+      mix ash.reset
       mix run priv/repo/seeds.exs
 
   The seeded user is `a@a.com` with password `12345678`.
@@ -51,7 +51,7 @@ defmodule Mix.Tasks.StartReg.Gen.XpGenAuth do
     ])
     |> add_seed(user_module)
     |> Igniter.add_task("ash.codegen", ["add_user_uuidv7_username_slug"])
-    |> Igniter.add_task("ash.setup")
+    |> Igniter.add_task("ash.reset")
     |> Igniter.add_task("run", [@seeds_file])
   end
 
