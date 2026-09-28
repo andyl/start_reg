@@ -2,6 +2,11 @@ defmodule Mix.Tasks.StartReg.Add.Sourceror do
   @shortdoc "Add Sourceror"
   @moduledoc """
   Add `sourceror` as a dependency
+
+  Reference:
+
+  - https://github.com/doorgan/sourceror
+
   """
 
   use Igniter.Mix.Task
