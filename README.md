@@ -9,7 +9,7 @@ A Registry for Elixir Starter
 
 This project contains two types of assets:
 
-- Steps - self-contained app-=config tasks 
+- Steps - self-contained app-config tasks 
 - Starters - a list of steps 
 
 These are built mostly for my own personal use and experimentation, not as a
