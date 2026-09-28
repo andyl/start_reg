@@ -48,7 +48,9 @@ defmodule Mix.Tasks.StartReg.Gen.XpMixCompletions do
   end
 
   defp generate_completions(igniter) do
-    case System.cmd("mix", ["complete.bash"], stderr_to_stdout: true) do
+    # stderr is left alone: `complete.bash` prints "cache updated in ..." there,
+    # which would otherwise land in the generated script and break sourcing.
+    case System.cmd("mix", ["complete.bash"]) do
       {output, 0} ->
         igniter
         |> Igniter.create_or_update_file(@completions_file, output, fn source ->
