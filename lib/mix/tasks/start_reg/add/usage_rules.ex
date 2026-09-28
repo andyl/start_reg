@@ -72,8 +72,3 @@ defmodule Mix.Tasks.StartReg.Add.UsageRules do
     end
   end
 end
-
-# CLAUDE:
-# When this runs, it does not give only: [:dev, :test] to the usage_rules dependency in mix.exs.
-# See the script 'gen_start --reset min myapp'
-# What is going on?
