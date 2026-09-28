@@ -56,17 +56,20 @@ defmodule StartReg.StepHelpers do
   Compose `package`'s Igniter installer (`mix <package>.install`), passing
   the igniter's argv with `--yes` guaranteed so the installer never prompts.
 
+  `extra_argv` is appended to the installer's argv, e.g.
+  `["--auth-strategy", "password"]`.
+
   Call `fetch_dependencies/2` first, so the installer task is available.
   """
-  def run_installer(igniter, package) do
-    Igniter.compose_task(igniter, "#{package}.install", argv(igniter))
+  def run_installer(igniter, package, extra_argv \\ []) do
+    Igniter.compose_task(igniter, "#{package}.install", argv(igniter, extra_argv))
   end
 
-  defp argv(igniter) do
+  defp argv(igniter, extra_argv) do
     argv =
       case igniter.args do
-        %{argv: argv} when is_list(argv) -> argv
-        _ -> []
+        %{argv: argv} when is_list(argv) -> argv ++ extra_argv
+        _ -> extra_argv
       end
 
     if "--yes" in argv, do: argv, else: argv ++ ["--yes"]
