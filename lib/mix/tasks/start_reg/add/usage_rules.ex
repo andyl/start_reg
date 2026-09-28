@@ -46,7 +46,7 @@ defmodule Mix.Tasks.StartReg.Add.UsageRules do
     {package, version} = Starter.Versions.latest_hex_dep(:usage_rules)
 
     igniter
-    |> Igniter.Project.Deps.add_dep({package, version})
+    |> Igniter.Project.Deps.add_dep({package, version, only: [:dev, :test]})
     |> Igniter.update_elixir_file("mix.exs", &add_usage_rules_defp/1)
     |> Igniter.Project.MixProject.update(:project, [:usage_rules], fn
       nil -> {:ok, {:code, quote(do: usage_rules())}}
