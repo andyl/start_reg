@@ -21,6 +21,6 @@ defmodule Mix.Tasks.StartReg.Add.AshPhoenix do
     igniter
     |> Igniter.Project.Deps.add_dep({package, version})
     |> StepHelpers.fetch_dependencies("ash_phoenix")
-    |> Igniter.compose_task("ash_phoenix.install", igniter.args.argv)
+    |> Igniter.compose_task("ash_phoenix.install", StepHelpers.argv(igniter))
   end
 end

@@ -21,6 +21,6 @@ defmodule Mix.Tasks.StartReg.Add.AshPostgres do
     igniter
     |> Igniter.Project.Deps.add_dep({package, version})
     |> StepHelpers.fetch_dependencies("ash_postgres")
-    |> Igniter.compose_task("ash_postgres.install", igniter.args.argv)
+    |> Igniter.compose_task("ash_postgres.install", StepHelpers.argv(igniter))
   end
 end

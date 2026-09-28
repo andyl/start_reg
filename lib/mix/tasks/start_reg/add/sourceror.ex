@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.StartReg.Add.Ash do
+defmodule Mix.Tasks.StartReg.Add.Sourceror do
   @shortdoc "Add Sourceror"
   @moduledoc """
   Add `sourceror` as a dependency

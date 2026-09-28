@@ -21,6 +21,6 @@ defmodule Mix.Tasks.StartReg.Add.Tidewave do
     igniter
     |> Igniter.Project.Deps.add_dep({package, version, only: :dev})
     |> StepHelpers.fetch_dependencies("tidewave")
-    |> Igniter.compose_task("tidewave.install", igniter.args.argv)
+    |> Igniter.compose_task("tidewave.install", StepHelpers.argv(igniter))
   end
 end
