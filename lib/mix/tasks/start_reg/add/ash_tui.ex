@@ -8,7 +8,7 @@ defmodule Mix.Tasks.StartReg.Add.AshTui do
 
   @impl Igniter.Mix.Task
   def igniter(igniter) do
-    {package, version} = Starter.Versions.latest_hex_dep(:sourceror)
+    {package, version} = Starter.Versions.latest_hex_dep(:ash_tui)
 
     igniter
     |> Igniter.Project.Deps.add_dep({package, version})
