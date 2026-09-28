@@ -74,14 +74,6 @@ defmodule Mix.Tasks.StartReg.Add.UsageRules do
 end
 
 # CLAUDE:
-# When this runs, it generates an annoying prompt:
-#
-# How would you like to proceed?
-# 0. Proceed *without* viewing changes. (default)
-# 1. Display the diff inline anyway.
-# 2. Write to `.igniter` so you can preview all of the changes, and wait to proceed.
-# Input number ❯  0
-#
-# I solved this in the past by using "echo 0 | mix usage_rules.sync".
-# Can this work here?  Is there a usage rules option to force selection of the default option?
-# I want to run end-to-end unattended.
+# When this runs, it does not give only: [:dev, :test] to the usage_rules dependency in mix.exs.
+# See the script 'gen_start --reset min myapp'
+# What is going on?
