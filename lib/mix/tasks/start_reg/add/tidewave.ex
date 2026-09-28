@@ -1,7 +1,8 @@
 defmodule Mix.Tasks.StartReg.Add.Tidewave do
   @shortdoc "Add Tidewave"
   @moduledoc """
-  Add `tidewave` as a dependency.
+  Add `tidewave` as a dependency and run its Igniter installer
+  (`mix tidewave.install`).
 
   References:
 
@@ -11,10 +12,15 @@ defmodule Mix.Tasks.StartReg.Add.Tidewave do
 
   use Igniter.Mix.Task
 
+  alias StartReg.StepHelpers
+
   @impl Igniter.Mix.Task
   def igniter(igniter) do
     {package, version} = Starter.Versions.latest_hex_dep(:tidewave)
 
-    Igniter.Project.Deps.add_dep(igniter, {package, version})
+    igniter
+    |> Igniter.Project.Deps.add_dep({package, version, only: :dev})
+    |> StepHelpers.fetch_dependencies("tidewave")
+    |> Igniter.compose_task("tidewave.install", igniter.args.argv)
   end
 end

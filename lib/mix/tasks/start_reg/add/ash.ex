@@ -1,7 +1,8 @@
 defmodule Mix.Tasks.StartReg.Add.Ash do
   @shortdoc "Add Ash"
   @moduledoc """
-  Add `ash` as a dependency.
+  Add `ash` as a dependency and run its Igniter installer
+  (`mix ash.install`).
 
   References:
 
@@ -12,10 +13,15 @@ defmodule Mix.Tasks.StartReg.Add.Ash do
 
   use Igniter.Mix.Task
 
+  alias StartReg.StepHelpers
+
   @impl Igniter.Mix.Task
   def igniter(igniter) do
     {package, version} = Starter.Versions.latest_hex_dep(:ash)
 
-    Igniter.Project.Deps.add_dep(igniter, {package, version})
+    igniter
+    |> Igniter.Project.Deps.add_dep({package, version})
+    |> StepHelpers.fetch_dependencies("ash")
+    |> Igniter.compose_task("ash.install", igniter.args.argv)
   end
 end
