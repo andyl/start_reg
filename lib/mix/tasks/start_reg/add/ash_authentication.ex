@@ -27,4 +27,3 @@ defmodule Mix.Tasks.StartReg.Add.AshAuthentication do
     |> run_installer(@package, ["--auth-strategy", "password"])
   end
 end
-
