@@ -6,11 +6,12 @@ defmodule Mix.Tasks.StartReg.Add.Sourceror do
 
   use Igniter.Mix.Task
 
+  import StartReg.StepHelpers
+
+  @package :sourceror
+
   @impl Igniter.Mix.Task
   def igniter(igniter) do
-    {package, version} = Starter.Versions.latest_hex_dep(:sourceror)
-
-    igniter
-    |> Igniter.Project.Deps.add_dep({package, version})
+    add_package(igniter, @package)
   end
 end

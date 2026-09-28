@@ -12,15 +12,15 @@ defmodule Mix.Tasks.StartReg.Add.AshPostgres do
 
   use Igniter.Mix.Task
 
-  alias StartReg.StepHelpers
+  import StartReg.StepHelpers
+
+  @package :ash_postgres
 
   @impl Igniter.Mix.Task
   def igniter(igniter) do
-    {package, version} = Starter.Versions.latest_hex_dep(:ash_postgres)
-
     igniter
-    |> Igniter.Project.Deps.add_dep({package, version})
-    |> StepHelpers.fetch_dependencies("ash_postgres")
-    |> Igniter.compose_task("ash_postgres.install", StepHelpers.argv(igniter))
+    |> add_package(@package)
+    |> fetch_dependencies(@package)
+    |> run_installer(@package)
   end
 end

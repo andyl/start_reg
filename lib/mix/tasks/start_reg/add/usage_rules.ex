@@ -32,6 +32,10 @@ defmodule Mix.Tasks.StartReg.Add.UsageRules do
 
   use Igniter.Mix.Task
 
+  import StartReg.StepHelpers
+
+  @package :usage_rules
+
   @usage_rules_defp """
   defp usage_rules do
     [
@@ -43,10 +47,8 @@ defmodule Mix.Tasks.StartReg.Add.UsageRules do
 
   @impl Igniter.Mix.Task
   def igniter(igniter) do
-    {package, version} = Starter.Versions.latest_hex_dep(:usage_rules)
-
     igniter
-    |> Igniter.Project.Deps.add_dep({package, version, only: [:dev, :test]})
+    |> add_package(@package, only: [:dev, :test])
     |> Igniter.update_elixir_file("mix.exs", &add_usage_rules_defp/1)
     |> Igniter.Project.MixProject.update(:project, [:usage_rules], fn
       nil -> {:ok, {:code, quote(do: usage_rules())}}
@@ -54,7 +56,7 @@ defmodule Mix.Tasks.StartReg.Add.UsageRules do
     end)
     # Queued tasks run in a separate `mix` process, after mix.exs is written
     # and `mix deps.get` has run, so sync sees the new config.
-    |> Igniter.add_task("usage_rules.sync", ["--yes"])
+    |> Igniter.add_task("#{@package}.sync", ["--yes"])
   end
 
   # Append `defp usage_rules/0` to the MixProject module, unless it already exists.

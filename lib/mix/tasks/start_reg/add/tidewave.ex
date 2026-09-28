@@ -12,15 +12,15 @@ defmodule Mix.Tasks.StartReg.Add.Tidewave do
 
   use Igniter.Mix.Task
 
-  alias StartReg.StepHelpers
+  import StartReg.StepHelpers
+
+  @package :tidewave
 
   @impl Igniter.Mix.Task
   def igniter(igniter) do
-    {package, version} = Starter.Versions.latest_hex_dep(:tidewave)
-
     igniter
-    |> Igniter.Project.Deps.add_dep({package, version, only: :dev})
-    |> StepHelpers.fetch_dependencies("tidewave")
-    |> Igniter.compose_task("tidewave.install", StepHelpers.argv(igniter))
+    |> add_package(@package, only: :dev)
+    |> fetch_dependencies(@package)
+    |> run_installer(@package)
   end
 end

@@ -13,15 +13,15 @@ defmodule Mix.Tasks.StartReg.Add.Ash do
 
   use Igniter.Mix.Task
 
-  alias StartReg.StepHelpers
+  import StartReg.StepHelpers
+
+  @package :ash
 
   @impl Igniter.Mix.Task
   def igniter(igniter) do
-    {package, version} = Starter.Versions.latest_hex_dep(:ash)
-
     igniter
-    |> Igniter.Project.Deps.add_dep({package, version})
-    |> StepHelpers.fetch_dependencies("ash")
-    |> Igniter.compose_task("ash.install", StepHelpers.argv(igniter))
+    |> add_package(@package)
+    |> fetch_dependencies(@package)
+    |> run_installer(@package)
   end
 end
