@@ -10,6 +10,7 @@ defmodule Mix.Tasks.StartReg.Add.AshAuthentication do
 
   - https://ash-authentication.hexdocs.pm/readme.html
   - https://github.com/ash-project/ash_authentication
+
   """
 
   use Igniter.Mix.Task
