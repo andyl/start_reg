@@ -1,7 +1,7 @@
-defmodule Mix.Tasks.StartReg.Gen.XpGenAuth do
-  @shortdoc "Generate User resources for Auth"
+defmodule Mix.Tasks.StartReg.Gen.XpGenAccounts do
+  @shortdoc "Generate Account resources for User"
   @moduledoc """
-  Generate User resources for Auth
+  Generate Account resources for user
 
   Run after `start_reg.add.ash_authentication` and
   `start_reg.add.ash_authentication_phoenix`. Updates `$APP.Accounts.User`,
