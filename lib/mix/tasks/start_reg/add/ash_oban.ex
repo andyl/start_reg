@@ -1,13 +1,13 @@
-defmodule Mix.Tasks.StartReg.Add.AshAdmin do
-  @shortdoc "Add AshAdmin"
+defmodule Mix.Tasks.StartReg.Add.AshOban do
+  @shortdoc "Add AshOban"
   @moduledoc """
-  Add `ash_admin` as a dependency and run its Igniter installer
-  (`mix ash_admin.install`).
+  Add `ash_oban` as a dependency and run its Igniter installer
+  (`mix ash_oban.install`).
 
   Reference:
 
-  - https://github.com/ash-project/ash_admin
-  - https://ash-admin.hexdocs.pm/readme.html
+  - https://github.com/ash-project/ash_oban
+  - https://ash-oban.hexdocs.pm/readme.html
 
   """
 
@@ -15,7 +15,7 @@ defmodule Mix.Tasks.StartReg.Add.AshAdmin do
 
   import StartReg.StepHelpers
 
-  @package :ash_admin
+  @package :ash_oban
 
   @impl Igniter.Mix.Task
   def igniter(igniter) do
