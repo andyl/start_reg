@@ -13,7 +13,8 @@ defmodule Mix.Tasks.StartReg.Gen.XpGenAccounts do
       mix ash.reset
       mix run priv/repo/seeds.exs
 
-  The seeded user is `a@a.com` with password `12345678`.
+  The seeded users are `a@a.com`, `b@b.com` and `c@c.com`, each with password
+  `12345678`.
 
   References:
 
@@ -26,7 +27,7 @@ defmodule Mix.Tasks.StartReg.Gen.XpGenAccounts do
   use Igniter.Mix.Task
 
   @seeds_file "priv/repo/seeds.exs"
-  @email "a@a.com"
+  @emails ["a@a.com", "b@b.com", "c@c.com"]
   @password "12345678"
 
   @impl Igniter.Mix.Task
@@ -62,27 +63,31 @@ defmodule Mix.Tasks.StartReg.Gen.XpGenAccounts do
   # upsert! (rather than seed!) keeps seeds.exs re-runnable; `:unique_email`
   # is the identity the ash_authentication password strategy adds.
   defp add_seed(igniter, user_module) do
-    seed = """
+    seeds = Enum.map(@emails, &{&1, seed(user_module, &1)})
+
+    Igniter.create_or_update_file(
+      igniter,
+      @seeds_file,
+      Enum.map_join(seeds, &elem(&1, 1)),
+      fn source ->
+        Rewrite.Source.update(source, :content, fn content ->
+          missing =
+            for {email, seed} <- seeds, !String.contains?(content, inspect(email)), do: seed
+
+          content <> Enum.join(missing)
+        end)
+      end
+    )
+  end
+
+  defp seed(user_module, email) do
+    """
 
     Ash.Seed.upsert!(
       #{inspect(user_module)},
-      %{email: #{inspect(@email)}, hashed_password: Bcrypt.hash_pwd_salt(#{inspect(@password)})},
+      %{email: #{inspect(email)}, hashed_password: Bcrypt.hash_pwd_salt(#{inspect(@password)})},
       identity: :unique_email
     )
     """
-
-    Igniter.create_or_update_file(igniter, @seeds_file, seed, fn source ->
-      Rewrite.Source.update(source, :content, fn content ->
-        if String.contains?(content, inspect(@email)), do: content, else: content <> seed
-      end)
-    end)
   end
 end
-
-# CLAUDE: modify this script to create THREE seed users:
-#
-# - a@a.com (like now)
-# - b@b.com
-# - c@c.com
-#
-# All users should have the password 12345678
