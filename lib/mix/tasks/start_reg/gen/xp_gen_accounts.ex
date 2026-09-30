@@ -78,3 +78,11 @@ defmodule Mix.Tasks.StartReg.Gen.XpGenAccounts do
     end)
   end
 end
+
+# CLAUDE: modify this script to create THREE seed users:
+#
+# - a@a.com (like now)
+# - b@b.com
+# - c@c.com
+#
+# All users should have the password 12345678
